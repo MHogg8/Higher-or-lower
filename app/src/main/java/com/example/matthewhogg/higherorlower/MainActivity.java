@@ -23,22 +23,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkGuess(View view){
         EditText guessedNumber = (EditText) findViewById(R.id.guessNumber);
-        String guessegNumberString = guessedNumber.getText().toString();
-        int guessedNumberInt = Integer.parseInt(guessegNumberString);
+        if(guessedNumber.length() == 0) {
 
-        System.out.println(guessedNumberInt);
+            Toast.makeText(getApplicationContext(), "Enter a Number DipShit", Toast.LENGTH_LONG).show();
+        }else {
+            String guessegNumberString = guessedNumber.getText().toString();
+            int guessedNumberInt = Integer.parseInt(guessegNumberString);
 
-        String message ="";
+            System.out.println(guessedNumberInt);
 
-        if (guessedNumberInt > randomNumber){
-            message = "Too high!";
-        } else if(guessedNumberInt < randomNumber){
-            message = "Too Low!";
-        }else{
-            message = "You motherfucking got it!";
+            String message = "";
+
+            if (guessedNumberInt > randomNumber) {
+                message = "Too high!";
+            } else if (guessedNumberInt < randomNumber) {
+                message = "Too Low!";
+            } else {
+                message = "You motherfucking got it!, Lets do this shit again!";
+                Random randomGenerator = new Random();
+                randomNumber = randomGenerator.nextInt(21);
+            }
+
+
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
-
-
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 }
